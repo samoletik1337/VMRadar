@@ -490,35 +490,34 @@ class GLMap : InputAdapter(), ApplicationListener, GameListener {
             else
                 espFontShadow.draw(spriteBatch, "THROW", 200f, windowHeight - 25f)
 
-            if (drawcompass != 1) {
-            } else {
-                (-1..1).forEach { i ->
-                    (-1..1).forEach { j ->
-                        compaseFontShadow.draw(spriteBatch, "0", windowWidth / 2 + i, windowHeight / 2 + 200 + j)        // N
-                        compaseFont.draw(spriteBatch, "0", windowWidth / 2, windowHeight / 2 + 200)        // N
+            if (drawcompass == 1) {
+                // (-1..1).forEach { i ->
+                // (-1..1).forEach { j ->
+                 compaseFontShadow.draw(spriteBatch, "0", windowWidth / 2 + 1, windowHeight / 2 + 200 + 1)        // N
+                compaseFont.draw(spriteBatch, "0", windowWidth / 2, windowHeight / 2 + 200)        // N
 
-                        compaseFontShadow.draw(spriteBatch, "45", windowWidth / 2 + 200 + i, windowHeight / 2 + 200 + j)  // NE
-                        compaseFont.draw(spriteBatch, "45", windowWidth / 2 + 200, windowHeight / 2 + 200)  // NE
+                 compaseFontShadow.draw(spriteBatch, "45", windowWidth / 2 + 200 + 1, windowHeight / 2 + 200 + 1)  // NE
+                compaseFont.draw(spriteBatch, "45", windowWidth / 2 + 200, windowHeight / 2 + 200)  // NE
 
-                        compaseFontShadow.draw(spriteBatch, "90", windowWidth / 2 + 200 + i, windowHeight / 2 + j)        // E
-                        compaseFont.draw(spriteBatch, "90", windowWidth / 2 + 200, windowHeight / 2)        // E
-                        compaseFont
-                        compaseFontShadow.draw(spriteBatch, "135", windowWidth / 2 + 200 + i, windowHeight / 2 - 200 + j)  // SE
-                        compaseFont.draw(spriteBatch, "135", windowWidth / 2 + 200, windowHeight / 2 - 200)  // SE
+                 compaseFontShadow.draw(spriteBatch, "90", windowWidth / 2 + 200 + 1, windowHeight / 2 + 1)        // E
+                compaseFont.draw(spriteBatch, "90", windowWidth / 2 + 200, windowHeight / 2)        // E
+                compaseFont
+                compaseFontShadow.draw(spriteBatch, "135", windowWidth / 2 + 200 + 1, windowHeight / 2 - 200 + 1)  // SE
+                compaseFont.draw(spriteBatch, "135", windowWidth / 2 + 200, windowHeight / 2 - 200)  // SE
 
-                        compaseFontShadow.draw(spriteBatch, "180", windowWidth / 2 + i, windowHeight / 2 - 200 + j)        // S
-                        compaseFont.draw(spriteBatch, "180", windowWidth / 2, windowHeight / 2 - 200)        // S
+                compaseFontShadow.draw(spriteBatch, "180", windowWidth / 2 + 1, windowHeight / 2 - 200 + 1)        // S
+                compaseFont.draw(spriteBatch, "180", windowWidth / 2, windowHeight / 2 - 200)        // S
 
-                        compaseFontShadow.draw(spriteBatch, "225", windowWidth / 2 - 200 + i, windowHeight / 2 - 200 + j)   // SW
-                        compaseFont.draw(spriteBatch, "225", windowWidth / 2 - 200, windowHeight / 2 - 200)  // SW
+                compaseFontShadow.draw(spriteBatch, "225", windowWidth / 2 - 200 + 1, windowHeight / 2 - 200 + 1)   // SW
+                compaseFont.draw(spriteBatch, "225", windowWidth / 2 - 200, windowHeight / 2 - 200)  // SW
 
-                        compaseFontShadow.draw(spriteBatch, "270", windowWidth / 2 - 200 + i, windowHeight / 2 + j)        // W
-                        compaseFont.draw(spriteBatch, "270", windowWidth / 2 - 200, windowHeight / 2)        // W
+                compaseFontShadow.draw(spriteBatch, "270", windowWidth / 2 - 200 + 1, windowHeight / 2 + 1)        // W
+                compaseFont.draw(spriteBatch, "270", windowWidth / 2 - 200, windowHeight / 2)        // W
 
-                        compaseFontShadow.draw(spriteBatch, "315", windowWidth / 2 - 200 + i, windowHeight / 2 + 200 + j)   // NW
-                        compaseFont.draw(spriteBatch, "315", windowWidth / 2 - 200, windowHeight / 2 + 200)  // NW
-                    }
-                }
+                compaseFontShadow.draw(spriteBatch, "315", windowWidth / 2 - 200 + 1, windowHeight / 2 + 200 + 1)   // NW
+                compaseFont.draw(spriteBatch, "315", windowWidth / 2 - 200, windowHeight / 2 + 200)  // NW
+                //  }
+                //}
             }
 
             val time = (pinLocation.cpy().sub(selfX, selfY).len() / runSpeed).toInt()
