@@ -148,9 +148,9 @@ class GLMap : InputAdapter(), ApplicationListener, GameListener {
     private lateinit var compaseFontShadow: BitmapFont
 
 
-    private val tileZooms = listOf("256", "512", "1024", "2048"/*, "4096"*/)
-    private val tileRowCounts = listOf(1, 2, 4, 8, 16/*, 32*/)
-    private val tileSizes = listOf(819200f, 409600f, 204800f, 102400f/*, 51200f*/)
+    private val tileZooms = listOf("256", "512", "1024", "2048", "4096")
+    private val tileRowCounts = listOf(1, 2, 4, 8, 16, 32)
+    private val tileSizes = listOf(819200f, 409600f, 204800f, 102400f,51200f)
 
     private val layout = GlyphLayout()
     private var windowWidth = initialWindowWidth
@@ -179,9 +179,7 @@ class GLMap : InputAdapter(), ApplicationListener, GameListener {
     private var prevScreenY = -1f
     private var screenOffsetX = 0f
     private var screenOffsetY = 0f
-    private var ayyAmount = 26
-    // 26 Fixes the item locations at full zoom
-    // The problem with item locations is the camera, the locations are correct.
+
 
     private fun Vector2.windowToMap() =
             Vector2(selfCoords.x + (x - windowWidth / 2.0f) * camera.zoom * windowToMapUnit + screenOffsetX,
@@ -381,6 +379,7 @@ class GLMap : InputAdapter(), ApplicationListener, GameListener {
         val cameraTileScale = Math.max(windowWidth, windowHeight) / camera.zoom
         val useScale: Int
         useScale = when {
+            cameraTileScale > 4096 -> 4
             cameraTileScale > 2048 -> 3
             cameraTileScale > 1024 -> 2
             cameraTileScale > 512 -> 1
@@ -493,13 +492,13 @@ class GLMap : InputAdapter(), ApplicationListener, GameListener {
             if (drawcompass == 1) {
                 // (-1..1).forEach { i ->
                 // (-1..1).forEach { j ->
-                 compaseFontShadow.draw(spriteBatch, "0", windowWidth / 2 + 1, windowHeight / 2 + 200 + 1)        // N
+                compaseFontShadow.draw(spriteBatch, "0", windowWidth / 2 + 1, windowHeight / 2 + 200 + 1)        // N
                 compaseFont.draw(spriteBatch, "0", windowWidth / 2, windowHeight / 2 + 200)        // N
 
-                 compaseFontShadow.draw(spriteBatch, "45", windowWidth / 2 + 200 + 1, windowHeight / 2 + 200 + 1)  // NE
+                compaseFontShadow.draw(spriteBatch, "45", windowWidth / 2 + 200 + 1, windowHeight / 2 + 200 + 1)  // NE
                 compaseFont.draw(spriteBatch, "45", windowWidth / 2 + 200, windowHeight / 2 + 200)  // NE
 
-                 compaseFontShadow.draw(spriteBatch, "90", windowWidth / 2 + 200 + 1, windowHeight / 2 + 1)        // E
+                compaseFontShadow.draw(spriteBatch, "90", windowWidth / 2 + 200 + 1, windowHeight / 2 + 1)        // E
                 compaseFont.draw(spriteBatch, "90", windowWidth / 2 + 200, windowHeight / 2)        // E
                 compaseFont
                 compaseFontShadow.draw(spriteBatch, "135", windowWidth / 2 + 200 + 1, windowHeight / 2 - 200 + 1)  // SE
@@ -574,8 +573,6 @@ class GLMap : InputAdapter(), ApplicationListener, GameListener {
             arrayListOf("Bag2", "Arm2", "Helm2")
         }
 
-
-        //println("$ayyAmount")
         val iconScale = 2f / camera.zoom
         paint(itemCamera.combined) {
             droppedItemLocation.values.asSequence().filter { it.second.isNotEmpty() }
@@ -584,23 +581,16 @@ class GLMap : InputAdapter(), ApplicationListener, GameListener {
                         val items = it.second
                         val (sx, sy) = Vector2(x, y).mapToWindow()
 
-                        val syFix = windowHeight - sy - ayyAmount
+                        val syFix = windowHeight - sy
                         // println(items)
                         items.forEach {
                             if (it !in weaponsToFilter) {
-
                                 if (it !in scopesToFilter) {
-
                                     if (it !in attachToFilter) {
-
                                         if (it !in level2Filter) {
-
                                             if (it !in ammoToFilter) {
-
                                                 if (it !in healsToFilter) {
-
                                                     if (it !in throwToFilter) {
-
                                                         if (
                                                                 iconScale > 20 &&
                                                                 sx > 0 && sx < windowWidth &&
@@ -609,10 +599,15 @@ class GLMap : InputAdapter(), ApplicationListener, GameListener {
                                                             iconImages.setIcon(it)
                                                             draw(
                                                                     iconImages.icon,
-                                                                    sx - iconScale / 2,
-                                                                    syFix + iconScale / 2,
-                                                                    iconScale,
-                                                                    iconScale
+                                                                    sx - iconScale / 2,  // y
+                                                                    syFix + iconScale / 2, // x
+                                                                    0f,     // origin y
+                                                                    1f,     // origin x
+                                                                    1f,      // height
+                                                                    1f,     // width
+                                                                    iconScale,     // scale
+                                                                    iconScale,     // scale
+                                                                    0f    // rotation we need this for car
                                                             )
                                                         }
                                                     }
