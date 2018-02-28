@@ -490,8 +490,7 @@ class GLMap : InputAdapter(), ApplicationListener, GameListener {
                 espFontShadow.draw(spriteBatch, "THROW", 200f, windowHeight - 25f)
 
             if (drawcompass == 1) {
-                // (-1..1).forEach { i ->
-                // (-1..1).forEach { j ->
+
                 compaseFontShadow.draw(spriteBatch, "0", windowWidth / 2 + 1, windowHeight / 2 + 200 + 1)        // N
                 compaseFont.draw(spriteBatch, "0", windowWidth / 2, windowHeight / 2 + 200)        // N
 
@@ -515,8 +514,6 @@ class GLMap : InputAdapter(), ApplicationListener, GameListener {
 
                 compaseFontShadow.draw(spriteBatch, "315", windowWidth / 2 - 200 + 1, windowHeight / 2 + 200 + 1)   // NW
                 compaseFont.draw(spriteBatch, "315", windowWidth / 2 - 200, windowHeight / 2 + 200)  // NW
-                //  }
-                //}
             }
 
             val time = (pinLocation.cpy().sub(selfX, selfY).len() / runSpeed).toInt()
@@ -533,13 +530,11 @@ class GLMap : InputAdapter(), ApplicationListener, GameListener {
             arrayListOf("red-dot", "2x", "8x", "4x", "holo", "DotSight")
         }
 
-
         attachToFilter = if (filterAttach != 1) {
             arrayListOf("")
         } else {
             arrayListOf("AR.Stock", "S.Loops", "CheekPad", "A.Grip", "V.Grip", "U.Ext", "AR.Ext", "S.Ext", "U.ExtQ", "AR.ExtQ", "S.ExtQ", "Choke", "AR.Comp", "FH", "U.Supp", "AR.Supp", "S.Supp")
         }
-
 
         weaponsToFilter = if (filterWeapon != 1) {
             arrayListOf("")
@@ -565,8 +560,6 @@ class GLMap : InputAdapter(), ApplicationListener, GameListener {
             arrayListOf("Grenade", "Molotov", "Smoke", "Flash")
         }
 
-
-
         level2Filter = if (filterLvl2 != 1) {
             arrayListOf("")
         } else {
@@ -580,7 +573,6 @@ class GLMap : InputAdapter(), ApplicationListener, GameListener {
                         val (x, y) = it.first
                         val items = it.second
                         val (sx, sy) = Vector2(x, y).mapToWindow()
-
                         val syFix = windowHeight - sy
                         // println(items)
                         items.forEach {
@@ -601,8 +593,8 @@ class GLMap : InputAdapter(), ApplicationListener, GameListener {
                                                                     iconImages.icon,
                                                                     sx - iconScale / 2,  // y
                                                                     syFix + iconScale / 2, // x
-                                                                    0f,     // origin y
-                                                                    1f,     // origin x
+                                                                    0f,     // origin x
+                                                                    1f,     // origin y
                                                                     1f,      // height
                                                                     1f,     // width
                                                                     iconScale,     // scale
