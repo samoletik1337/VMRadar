@@ -62,6 +62,9 @@ Using [maven](https://maven.apache.org/) or [JetBrains](https://www.jetbrains.co
 #### JAVA_HOME
 ![Imgur](https://i.imgur.com/4zT1YNR.png)
 
+#### COMPATIBILITY
+![Imgur](https://i.imgur.com/Oz6HoDe.png)
+
 
 #### You can find detailed instructions on how to run a maven project [here](https://maven.apache.org/run.html)
 
